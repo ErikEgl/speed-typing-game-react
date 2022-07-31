@@ -5,8 +5,9 @@ function App() {
   const [typeData, setTypeData] = React.useState({
     textareaValue: "",
   })
-
-  const [remainingTime, setRemainingTime] = React.useState(10)
+  const timeRemain = 10
+  const [isGameStarted, setIsGameStarted] = React.useState(false)
+  const [remainingTime, setRemainingTime] = React.useState(timeRemain)
   const [wordsNum, setWordsNum] = React.useState(0)
 
   
@@ -16,14 +17,20 @@ function App() {
   }
 
   useEffect(() => {
+    if(!isGameStarted) return
     setTimeout(() => {
-      if(remainingTime === 0) return
+      if(remainingTime === 0) {
+        setIsGameStarted(false)
+        setRemainingTime(timeRemain)
+        return
+      }
       setRemainingTime(prevTime => prevTime - 1)
     }, 1000);
-  }, [remainingTime]);
+  }, [remainingTime, isGameStarted]);
 
   function handleClick() {
     setWordsNum(countWords(typeData.textareaValue))
+    setIsGameStarted(true)
   }
 
   function handleChange(event) {
