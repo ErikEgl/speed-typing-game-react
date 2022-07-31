@@ -22,6 +22,7 @@ function App() {
       if(remainingTime === 0) {
         setIsGameStarted(false)
         setRemainingTime(timeRemain)
+        setWordsNum(countWords(typeData.textareaValue))
         return
       }
       setRemainingTime(prevTime => prevTime - 1)
@@ -29,7 +30,6 @@ function App() {
   }, [remainingTime, isGameStarted]);
 
   function handleClick() {
-    setWordsNum(countWords(typeData.textareaValue))
     setIsGameStarted(true)
   }
 
