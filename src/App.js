@@ -1,56 +1,72 @@
-import React, {useEffect} from "react";
-
+import React, { useEffect } from "react";
 
 function App() {
   const [typeData, setTypeData] = React.useState({
     textareaValue: "",
-  })
-  const timeRemain = 10
-  const [isGameStarted, setIsGameStarted] = React.useState(false)
-  const [remainingTime, setRemainingTime] = React.useState(timeRemain)
-  const [wordsNum, setWordsNum] = React.useState(0)
-
+  });
   
+  const STARTING_TIME = 2;
+
+
+  const [isGameStarted, setIsGameStarted] = React.useState(false);
+  const [isDisabledTexarea, setIsDisabledTexarea] = React.useState(true);
+  const [remainingTime, setRemainingTime] = React.useState(STARTING_TIME);
+  const [wordsNum, setWordsNum] = React.useState(0);
+  
+
   function countWords(str) {
-    const arr = str.trim().split(' ');
-    return arr.filter(word => word !== "").length
+    const arr = str.trim().split(" ");
+    return arr.filter((word) => word !== "").length;
   }
 
   useEffect(() => {
-    if(!isGameStarted) return
+    if (!isGameStarted) return;
     setTimeout(() => {
-      if(remainingTime === 0) {
-        setIsGameStarted(false)
-        setRemainingTime(timeRemain)
-        setWordsNum(countWords(typeData.textareaValue))
-        return
+      if (remainingTime === 0) {
+        setIsGameStarted(false);
+        setRemainingTime(STARTING_TIME);
+        setWordsNum(countWords(typeData.textareaValue));
+        setIsDisabledTexarea(true)
+        setTypeData((prevData) => {
+          return {
+            ...prevData,
+            textareaValue: '',
+          };
+        });
+        return;
       }
-      setRemainingTime(prevTime => prevTime - 1)
+      setRemainingTime((prevTime) => prevTime - 1);
     }, 1000);
   }, [remainingTime, isGameStarted]);
 
   function handleClick() {
-    setIsGameStarted(true)
+    setIsDisabledTexarea(false)
+    setIsGameStarted(true);
   }
 
   function handleChange(event) {
-    const {name, value} = event.target
-    setTypeData(prevData => {
+    const { name, value } = event.target;
+    setTypeData((prevData) => {
       return {
         ...prevData,
-        [name]: value
-      }
-    })
+        [name]: value,
+      };
+    });
   }
   return (
-      <>
-        <h1>How fast do you type?</h1>
-        <textarea name="textareaValue" onChange={handleChange} value={typeData.textareaValue}/>
-        <h4>Time remaining: {remainingTime}</h4>
-        <button onClick={handleClick}>Start</button>
-        <h1>Word count: {wordsNum}</h1>
-      </>
-  )
+    <>
+      <h1>How fast do you type?</h1>
+      <textarea
+        disabled={isDisabledTexarea}
+        name="textareaValue"
+        onChange={handleChange}
+        value={typeData.textareaValue}
+      />
+      <h4>Time remaining: {remainingTime}</h4>
+      <button onClick={handleClick}>Start</button>
+      <h1>Word count: {wordsNum}</h1>
+    </>
+  );
 }
 
 export default App;
