@@ -9,7 +9,6 @@ function App() {
 
 
   const [isGameStarted, setIsGameStarted] = React.useState(false);
-  const [isDisabledTexarea, setIsDisabledTexarea] = React.useState(true);
   const [remainingTime, setRemainingTime] = React.useState(STARTING_TIME);
   const [wordsNum, setWordsNum] = React.useState(0);
   
@@ -26,7 +25,6 @@ function App() {
         setIsGameStarted(false);
         setRemainingTime(STARTING_TIME);
         setWordsNum(countWords(typeData.textareaValue));
-        setIsDisabledTexarea(true)
         setTypeData((prevData) => {
           return {
             ...prevData,
@@ -40,7 +38,6 @@ function App() {
   }, [remainingTime, isGameStarted]);
 
   function handleClick() {
-    setIsDisabledTexarea(false)
     setIsGameStarted(true);
   }
 
@@ -57,13 +54,13 @@ function App() {
     <>
       <h1>How fast do you type?</h1>
       <textarea
-        disabled={isDisabledTexarea}
+        disabled={!isGameStarted}
         name="textareaValue"
         onChange={handleChange}
         value={typeData.textareaValue}
       />
       <h4>Time remaining: {remainingTime}</h4>
-      <button onClick={handleClick}>Start</button>
+      <button disabled={isGameStarted} onClick={handleClick}>Start</button>
       <h1>Word count: {wordsNum}</h1>
     </>
   );
