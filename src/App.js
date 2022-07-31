@@ -1,11 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 
 function App() {
+
+  const textAreaRef = useRef(null)
+
   const [typeData, setTypeData] = React.useState({
     textareaValue: "",
   });
-  
-  const STARTING_TIME = 2;
+
+  const STARTING_TIME = 10;
 
 
   const [isGameStarted, setIsGameStarted] = React.useState(false);
@@ -39,6 +42,8 @@ function App() {
 
   function handleClick() {
     setIsGameStarted(true);
+    textAreaRef.current.disabled = false //unfortunately without that hack focus is not applying to the textarea
+    textAreaRef.current.focus() 
   }
 
   function handleChange(event) {
@@ -54,6 +59,7 @@ function App() {
     <>
       <h1>How fast do you type?</h1>
       <textarea
+        ref={textAreaRef}
         disabled={!isGameStarted}
         name="textareaValue"
         onChange={handleChange}
