@@ -33,11 +33,11 @@ console.log(wordsNum);
   }
   return (
       <>
-        <h1>Title</h1>
+        <h1>How fast do you type?</h1>
         <textarea name="textareaValue" onChange={handleChange} value={typeData.textareaValue}/>
-        <h4>The amount of time remaining</h4>
-        <button onClick={handleClick}>Start the game</button>
-        <h1>{wordsNum}</h1>
+        <h4>Time remaining: ???</h4>
+        <button onClick={handleClick}>Start</button>
+        <h1>Word count: {wordsNum}</h1>
       </>
   )
 }
