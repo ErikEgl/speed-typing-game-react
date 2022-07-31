@@ -1,10 +1,13 @@
 @import url("https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap");
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   font-family: "Press Start 2P", cursive;
 }
 
-html, body {
+html,
+body {
   background-color: #000;
   color: #00b800;
   margin: 0;
@@ -31,6 +34,12 @@ button:hover, button:focus {
   background-color: #000;
   color: #00b800;
 }
+button:disabled:hover {
+  border: 4px solid transparent;
+  background-color: #00b800;
+  color: revert;
+  cursor: auto;
+}
 
 h1 {
   font-size: 20px;
@@ -45,6 +54,9 @@ textarea {
   height: 200px;
   background-color: #00b800;
   padding: 10px;
+}
+textarea:disabled {
+  background-color: #a5a2a2;
 }
 
 .container {
