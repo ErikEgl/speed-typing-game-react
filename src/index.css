@@ -20,10 +20,16 @@ body {
 button {
   display: block;
   margin: 0 auto;
-  border: none;
+  border: 4px solid transparent;
   background-color: #00b800;
   padding: 10px 20px;
   text-transform: uppercase;
+  cursor: pointer;
+}
+button:hover, button:focus {
+  border: 4px solid #00b800;
+  background-color: #000;
+  color: #00b800;
 }
 
 h1 {
