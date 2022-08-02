@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/speed-typing-game-react/static/css/main.4b906b73.css",
-    "main.js": "/speed-typing-game-react/static/js/main.fd78152f.js",
+    "main.css": "/speed-typing-game-react/static/css/main.e795763d.css",
+    "main.js": "/speed-typing-game-react/static/js/main.91a2d4db.js",
     "index.html": "/speed-typing-game-react/index.html",
-    "main.4b906b73.css.map": "/speed-typing-game-react/static/css/main.4b906b73.css.map",
-    "main.fd78152f.js.map": "/speed-typing-game-react/static/js/main.fd78152f.js.map"
+    "main.e795763d.css.map": "/speed-typing-game-react/static/css/main.e795763d.css.map",
+    "main.91a2d4db.js.map": "/speed-typing-game-react/static/js/main.91a2d4db.js.map"
   },
   "entrypoints": [
-    "static/css/main.4b906b73.css",
-    "static/js/main.fd78152f.js"
+    "static/css/main.e795763d.css",
+    "static/js/main.91a2d4db.js"
   ]
 }
