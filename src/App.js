@@ -1,20 +1,11 @@
-import React, { useEffect, useRef } from "react";
-import mainLogic from "./customHook";
+import React from "react";
+import useWordGame from "./useWordGame";
 
-/**
- * Challenge:
- * 
- * Move the "business logic" into a custom hook, which will provide
- * any parts of state and any functions to this component to use.
- * 
- * You can easily tell which parts the component needs by looking at 
- * the variables being used inside the `return`ed markup below.
- */
 
 
 function App() {
 
-  const [textAreaRef, isGameStarted, handleChange, typeData, remainingTime, handleClick, wordsNum] = mainLogic()
+  const [textAreaRef, isGameStarted, handleChange, typeData, remainingTime, handleClick, wordsNum] = useWordGame()
   return (
     <>
       <h1>How fast do you type?</h1>

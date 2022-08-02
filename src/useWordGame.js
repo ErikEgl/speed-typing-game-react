@@ -1,16 +1,16 @@
-import React, { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 
-function MainLogic() {
-  const [isGameStarted, setIsGameStarted] = React.useState(false);
-  const [wordsNum, setWordsNum] = React.useState(0);
-  const [typeData, setTypeData] = React.useState({
+function useWordGame() {
+  const [isGameStarted, setIsGameStarted] = useState(false);
+  const [wordsNum, setWordsNum] = useState(0);
+  const [typeData, setTypeData] = useState({
     textareaValue: "",
   });
   const textAreaRef = useRef(null);
 
   const STARTING_TIME = 10;
 
-  const [remainingTime, setRemainingTime] = React.useState(STARTING_TIME);
+  const [remainingTime, setRemainingTime] = useState(STARTING_TIME);
 
   useEffect(() => {
     if (!isGameStarted) return;
@@ -63,4 +63,4 @@ function MainLogic() {
   ];
 }
 
-export default MainLogic;
+export default useWordGame;
