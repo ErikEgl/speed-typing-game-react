@@ -1,60 +1,20 @@
 import React, { useEffect, useRef } from "react";
+import mainLogic from "./customHook";
+
+/**
+ * Challenge:
+ * 
+ * Move the "business logic" into a custom hook, which will provide
+ * any parts of state and any functions to this component to use.
+ * 
+ * You can easily tell which parts the component needs by looking at 
+ * the variables being used inside the `return`ed markup below.
+ */
+
 
 function App() {
 
-  const textAreaRef = useRef(null)
-
-  const [typeData, setTypeData] = React.useState({
-    textareaValue: "",
-  });
-
-  const STARTING_TIME = 10;
-
-
-  const [isGameStarted, setIsGameStarted] = React.useState(false);
-  const [remainingTime, setRemainingTime] = React.useState(STARTING_TIME);
-  const [wordsNum, setWordsNum] = React.useState(0);
-  
-
-  function countWords(str) {
-    const arr = str.trim().split(" ");
-    return arr.filter((word) => word !== "").length;
-  }
-
-  useEffect(() => {
-    if (!isGameStarted) return;
-    setTimeout(() => {
-      if (remainingTime === 0) {
-        setIsGameStarted(false);
-        setRemainingTime(STARTING_TIME);
-        setWordsNum(countWords(typeData.textareaValue));
-        setTypeData((prevData) => {
-          return {
-            ...prevData,
-            textareaValue: '',
-          };
-        });
-        return;
-      }
-      setRemainingTime((prevTime) => prevTime - 1);
-    }, 1000);
-  }, [remainingTime, isGameStarted]);
-
-  function handleClick() {
-    setIsGameStarted(true);
-    textAreaRef.current.disabled = false //unfortunately without that hack focus is not applying to the textarea
-    textAreaRef.current.focus() 
-  }
-
-  function handleChange(event) {
-    const { name, value } = event.target;
-    setTypeData((prevData) => {
-      return {
-        ...prevData,
-        [name]: value,
-      };
-    });
-  }
+  const [textAreaRef, isGameStarted, handleChange, typeData, remainingTime, handleClick, wordsNum] = mainLogic()
   return (
     <>
       <h1>How fast do you type?</h1>
@@ -73,3 +33,5 @@ function App() {
 }
 
 export default App;
+
+
