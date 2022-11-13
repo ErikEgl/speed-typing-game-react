@@ -7,7 +7,7 @@ const RANDOM_QUOTE_API_URL = 'https://api.quotable.io/random?minLength=100&maxLe
 function AppContextProvider(props) {
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [wordsNum, setWordsNum] = useState(0);
-  const [quote, setQuote] = useState("Text for typing");
+  const [quoteData, setQuoteData] = useState("Text for typing");
 
 
 
@@ -26,7 +26,7 @@ function AppContextProvider(props) {
     if(!isGameStarted) {
       fetch(RANDOM_QUOTE_API_URL)
       .then(response => response.json())
-      .then(data => setQuote(data.content))
+      .then(data => setQuoteData(data))
     }
   }, [isGameStarted])
 
@@ -84,7 +84,7 @@ function AppContextProvider(props) {
         remainingTime,
         handleClick,
         wordsNum,
-        quote,
+        quoteData,
         STARTING_TIME
       }}
     >
