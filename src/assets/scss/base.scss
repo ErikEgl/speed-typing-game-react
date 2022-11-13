@@ -51,6 +51,7 @@ h1 {
 }
 
 textarea {
+  line-height: 1.3;
   border: 3px solid $black;
   width: 90%;
   margin: 0 auto;
@@ -59,7 +60,7 @@ textarea {
   background-color: $green;
   padding: $main-padding;
   &:disabled {
-    background-color: #a5a2a2;
+    background-color: $gray;
   }
 }
 p {
