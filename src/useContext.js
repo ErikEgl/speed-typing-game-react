@@ -84,7 +84,8 @@ function AppContextProvider(props) {
         remainingTime,
         handleClick,
         wordsNum,
-        quote
+        quote,
+        STARTING_TIME
       }}
     >
       {props.children}

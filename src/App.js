@@ -2,6 +2,7 @@ import React from "react";
 import { useContext } from "react";
 import { UserContext } from "./useContext";
 import Quote from "./components/Quote/Quote";
+import Speed from "./components/Speed/Speed";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
       <h4>Time remaining: {remainingTime}</h4>
       <button disabled={isGameStarted} onClick={handleClick}>Start</button>
       <h1>Word count: {wordsNum}</h1>
+      <Speed/>
     </>
   );
 }
