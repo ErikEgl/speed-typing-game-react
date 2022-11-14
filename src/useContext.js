@@ -8,8 +8,8 @@ function AppContextProvider(props) {
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [wordsNum, setWordsNum] = useState(0);
   const [quoteData, setQuoteData] = useState("Text for typing");
-  const [startingTime, setStartingTime] = useState(10);
-
+  const [startingTime, setStartingTime] = useState(5);
+  const quoteValue = quoteData.content && quoteData.content.split("");
 
 
 
@@ -23,14 +23,27 @@ function AppContextProvider(props) {
 
 
   const [remainingTime, setRemainingTime] = useState(startingTime);
+  function fetchQuote(sequence) {
+    fetch(RANDOM_QUOTE_API_URL)
+    .then(response => response.json())
+    .then(data => {
+      if(sequence === "firstRender") {
+        return (
+          setQuoteData(data)
+        )
+      } else {
+        return (
+          setQuoteData(data),
+          startGame()
+        )
+      }
+    }
+    )
+  }
 
   useEffect(() => {
-    if(!isGameStarted) {
-      fetch(RANDOM_QUOTE_API_URL)
-      .then(response => response.json())
-      .then(data => setQuoteData(data))
-    }
-  }, [isGameStarted])
+    fetchQuote("firstRender")
+  }, [])
 
   useEffect(() => {
     if (!isGameStarted) return;
@@ -39,12 +52,6 @@ function AppContextProvider(props) {
         setIsGameStarted(false);
         setRemainingTime(startingTime);
         setWordsNum(countWords(typeData.textareaValue));
-        setTypeData((prevData) => {
-          return {
-            ...prevData,
-            textareaValue: "",
-          };
-        });
         return;
       }
       setRemainingTime((prevTime) => prevTime - 1);
@@ -56,12 +63,25 @@ function AppContextProvider(props) {
     return arr.filter((word) => word !== "").length;
   }
 
-  function handleClick() {
+  function startGame() {
     setIsGameStarted(true);
     textAreaRef.current.disabled = false; //unfortunately without that hack focus is not applying to the textarea
     textAreaRef.current.focus();
-    setTypeData(dataOptions)
+    setTypeData((prevData) => {
+      return {
+        ...prevData,
+        textareaValue: "",
+      };
+    });
     setWordsNum(0)
+  }
+
+  function handleClick() {
+    if(typeData.textareaValue.length > 0) {
+      fetchQuote()
+    } else {
+      startGame()
+    }
   }
 
   function handleChange(event) {
@@ -74,14 +94,9 @@ function AppContextProvider(props) {
       });
   }
   function changeTime(n) {
-    console.log(n);
     setStartingTime(prevTime => prevTime + n)
     setRemainingTime(prevTime => prevTime + n)
   }
-
-  useEffect(() => {
-    console.log(startingTime);
-  }, [startingTime]) 
 
   return (
     <UserContext.Provider
@@ -95,7 +110,9 @@ function AppContextProvider(props) {
         wordsNum,
         quoteData,
         startingTime,
-        changeTime
+        changeTime,
+        quoteValue,
+        fetchQuote
       }}
     >
       {props.children}

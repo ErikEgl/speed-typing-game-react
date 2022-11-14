@@ -1,8 +1,7 @@
 import { useContext } from "react";
 import { UserContext } from "../../useContext";
 function Quote() {
-  const { quoteData, typeData } = useContext(UserContext);
-  const quoteValue = quoteData.content.split("");
+  const { typeData, quoteValue } = useContext(UserContext);
 
   return (
     <>
