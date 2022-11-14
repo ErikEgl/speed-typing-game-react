@@ -4,7 +4,7 @@ import { UserContext } from "./useContext";
 import Quote from "./components/Quote/Quote";
 import Speed from "./components/Speed/Speed";
 import Time from "./components/Time/Time";
-
+import Accuracy from "./components/Accuracy/Accuracy";
 
 function App() {
   const {
@@ -35,6 +35,7 @@ function App() {
           <Time />
           <h1>Word count: {wordsNum}</h1>
           <Speed />
+          <Accuracy />
         </>
       ) : <h1>Refresh the page</h1>}
     </>
