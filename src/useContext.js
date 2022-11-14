@@ -8,6 +8,8 @@ function AppContextProvider(props) {
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [wordsNum, setWordsNum] = useState(0);
   const [quoteData, setQuoteData] = useState("Text for typing");
+  const [startingTime, setStartingTime] = useState(10);
+
 
 
 
@@ -18,9 +20,9 @@ function AppContextProvider(props) {
   const [typeData, setTypeData] = useState(dataOptions);
   const textAreaRef = useRef(null);
 
-  const STARTING_TIME = 10;
 
-  const [remainingTime, setRemainingTime] = useState(STARTING_TIME);
+
+  const [remainingTime, setRemainingTime] = useState(startingTime);
 
   useEffect(() => {
     if(!isGameStarted) {
@@ -35,7 +37,7 @@ function AppContextProvider(props) {
     setTimeout(() => {
       if (remainingTime === 0) {
         setIsGameStarted(false);
-        setRemainingTime(STARTING_TIME);
+        setRemainingTime(startingTime);
         setWordsNum(countWords(typeData.textareaValue));
         setTypeData((prevData) => {
           return {
@@ -71,8 +73,15 @@ function AppContextProvider(props) {
         };
       });
   }
+  function changeTime(n) {
+    console.log(n);
+    setStartingTime(prevTime => prevTime + n)
+    setRemainingTime(prevTime => prevTime + n)
+  }
 
-
+  useEffect(() => {
+    console.log(startingTime);
+  }, [startingTime]) 
 
   return (
     <UserContext.Provider
@@ -85,7 +94,8 @@ function AppContextProvider(props) {
         handleClick,
         wordsNum,
         quoteData,
-        STARTING_TIME
+        startingTime,
+        changeTime
       }}
     >
       {props.children}

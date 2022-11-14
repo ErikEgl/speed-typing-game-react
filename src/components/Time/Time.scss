@@ -1,0 +1,11 @@
+.time-block {
+    .time-handler {
+        display: flex;
+        .plus {
+            margin: 0 auto 0 15px;
+        }
+        .minus {
+            margin:  0 15px 0 auto;
+        }
+    }
+}

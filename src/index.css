@@ -83,4 +83,14 @@ p {
   text-decoration: underline;
 }
 
+.time-block .time-handler {
+  display: flex;
+}
+.time-block .time-handler .plus {
+  margin: 0 auto 0 15px;
+}
+.time-block .time-handler .minus {
+  margin: 0 15px 0 auto;
+}
+
 /*# sourceMappingURL=index.css.map */

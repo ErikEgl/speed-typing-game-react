@@ -3,6 +3,8 @@ import { useContext } from "react";
 import { UserContext } from "./useContext";
 import Quote from "./components/Quote/Quote";
 import Speed from "./components/Speed/Speed";
+import Time from "./components/Time/Time";
+
 
 function App() {
   const {
@@ -10,8 +12,6 @@ function App() {
     isGameStarted,
     handleChange,
     typeData,
-    remainingTime,
-    handleClick,
     wordsNum,
     quoteData,
   } = useContext(UserContext);
@@ -32,10 +32,7 @@ function App() {
             value={typeData.textareaValue}
             placeholder={`Welcome to Speed Typing Game! Click on START button and start typing ${quoteData?.author}${quoteData?.author.slice(-1) === "s" ? "'" : "'s"} quote immediately!`}
           />
-          <h4>Time remaining: {remainingTime}</h4>
-          <button disabled={isGameStarted} onClick={handleClick}>
-            Start
-          </button>
+          <Time />
           <h1>Word count: {wordsNum}</h1>
           <Speed />
         </>
