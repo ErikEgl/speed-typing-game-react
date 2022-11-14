@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { UserContext } from "../../useContext";
 
 function Accuracy() {
@@ -13,7 +13,7 @@ function Accuracy() {
   }
   return (
     <>
-      <div>accuracy: {accVal && Math.round((accVal.length * 100) / typeData.textareaValue.length) }%</div>
+      {accVal?.length > 0 ? <div>accuracy: {accVal.length && Math.round((accVal.length * 100) / typeData.textareaValue.length) }%</div> :  "" }
     </>
   );
 
