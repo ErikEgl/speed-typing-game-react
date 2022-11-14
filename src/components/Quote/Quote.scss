@@ -1,13 +1,13 @@
 .quote {
     & span {
-        color: $gray;
+        color: $helper-color2;
         line-height: 1.3;
     }
     .correct {
-        color: $green;
+        color: $primary-color;
     }
     .incorrect {
-        color: $red;
+        color: $accent-color;
         text-decoration: underline;
     }
 }
